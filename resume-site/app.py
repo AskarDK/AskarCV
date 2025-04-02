@@ -81,10 +81,13 @@ def send_telegram_message(text):
 
 def load_translations(lang='ru'):
     try:
-        with open(f'translations/{lang}.json', encoding='utf-8') as f:
+        base_path = os.path.abspath(os.path.dirname(__file__))
+        file_path = os.path.join(base_path, 'translations', f'{lang}.json')
+        with open(file_path, encoding='utf-8') as f:
             return json.load(f)
     except FileNotFoundError:
-        with open(f'translations/ru.json', encoding='utf-8') as f:
+        fallback_path = os.path.join(base_path, 'translations', 'ru.json')
+        with open(fallback_path, encoding='utf-8') as f:
             return json.load(f)
 
 # ✅ Автоматическое создание базы, если её нет
