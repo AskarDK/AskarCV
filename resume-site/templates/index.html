@@ -1,0 +1,169 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- Навигация -->
+<nav class="fixed top-0 w-full bg-white bg-opacity-90 backdrop-blur shadow-md z-20">
+  <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+    <a href="#" class="text-2xl font-bold text-green-500">{{ t['site_name'] }}</a>
+
+    <div class="space-x-4">
+      <a href="/?lang=ru" class="{% if lang == 'ru' %}font-bold text-green-600{% endif %}">RU</a>
+<a href="/?lang=en" class="{% if lang == 'en' %}font-bold text-green-600{% endif %}">EN</a>
+
+
+      <a href="#about">{{ t['nav_about'] }}</a>
+      <a href="#skills">{{ t['nav_skills'] }}</a>
+      <a href="#projects">{{ t['nav_projects'] }}</a>
+      <a href="#contacts">{{ t['nav_contacts'] }}</a>
+    </div>
+  </div>
+</nav>
+
+<section id="hero" class="h-screen bg-gradient-to-br from-orange-50 to-teal-50 flex flex-col items-center justify-center text-center px-4">
+  <img data-aos="zoom-in" src="{{ url_for('static', filename='images/askar_portrait.jpg') }}" class="rounded-full w-44 h-44 object-cover shadow-lg mb-6" alt="Askar">
+  <h1 data-aos="fade-down" class="text-5xl md:text-6xl font-bold bg-clip-text bg-gradient-to-r from-green-400 to-teal-500 text-transparent">
+    {{ t['hero_title'] }}
+  </h1>
+  <p data-aos="fade-up" class="mt-4 text-xl md:text-2xl text-gray-700 max-w-2xl">
+    {{ t['hero_subtitle'] }}
+  </p>
+  <a href="#about" class="scroll-btn mt-8 px-6 py-2 bg-gradient-to-r from-orange-400 to-orange-500 text-white rounded-full hover:scale-105 transition">{{ t['learn_more'] }}</a>
+  <a href="{{ url_for('static', filename='files/Dauletbek Askar_CV.pdf') }}" download class="mt-4 inline-flex items-center gap-2 px-6 py-2 bg-gradient-to-r from-green-500 to-teal-500 text-white rounded-full hover:scale-105 transition duration-300 shadow-lg">
+    <i class="fas fa-file-download"></i>
+    {{ t['download_cv'] }}
+  </a>
+</section>
+
+
+<!-- Обо мне -->
+<section id="about" class="py-12 md:py-20 flex flex-col md:flex-row items-center justify-center gap-10 px-4">
+  <!-- Левая часть: фото -->
+  <div data-aos="fade-right" class="w-full md:w-1/2 flex justify-center">
+    <img src="{{ url_for('static', filename='images/askar_mit.jpg') }}" alt="Askar at MIT" class="rounded-2xl shadow-lg w-80 h-80 object-cover">
+  </div>
+
+  <!-- Правая часть: текст + языки -->
+  <div data-aos="fade-left" class="w-full md:w-1/2 max-w-xl">
+    <h2 class="text-3xl font-semibold mb-4">Аскар Даулетбек</h2>
+    <p class="text-gray-600 leading-relaxed">
+      {{ t['about_me_text'] }}
+    </p>
+
+    <!-- Языки -->
+    <div class="mt-6 grid grid-cols-3 gap-4">
+      <div class="bg-white shadow rounded-lg p-3 text-center">
+        <p class="font-semibold">{{ t['lang_kazakh'] }}</p>
+        <p class="text-sm text-gray-500">{{ t['lang_native'] }}</p>
+      </div>
+      <div class="bg-white shadow rounded-lg p-3 text-center">
+        <p class="font-semibold">{{ t['lang_russian'] }}</p>
+        <p class="text-sm text-gray-500">{{ t['lang_fluent'] }}</p>
+      </div>
+      <div class="bg-white shadow rounded-lg p-3 text-center">
+        <p class="font-semibold">{{ t['lang_english'] }}</p>
+        <p class="text-sm text-gray-500">{{ t['lang_upper'] }}</p>
+      </div>
+    </div>
+
+    <!-- Контакты -->
+    <p class="mt-6 text-gray-500 text-sm">
+      📍 Алматы | 📧 <a href="mailto:dauletbekoffa@gmail.com" class="text-blue-600 hover:underline">dauletbekoffa@gmail.com</a><br>
+      📱 <a href="tel:+77472474546" class="text-blue-600 hover:underline">+7 747 247 45 46</a><br>
+      🔗 <a href="https://www.linkedin.com/in/askar-dauletbekoff-68266327a/" target="_blank" class="text-blue-600 hover:underline">LinkedIn</a> |
+      <a href="https://t.me/AskarDK" target="_blank" class="text-blue-600 hover:underline">Telegram</a> |
+      <a href="https://instagram.com/i.am.as.da" target="_blank" class="text-blue-600 hover:underline">Instagram</a>
+    </p>
+  </div>
+</section>
+
+
+<section id="stats" class="py-12">
+  <div class="max-w-5xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+    <div><p class="text-4xl font-bold text-green-500">12+</p><p class="text-gray-600">{{ t['stats_projects'] }}</p></div>
+    <div><p class="text-4xl font-bold text-green-500">8</p><p class="text-gray-600">{{ t['stats_certs'] }}</p></div>
+    <div><p class="text-4xl font-bold text-green-500">3</p><p class="text-gray-600">{{ t['stats_years'] }}</p></div>
+    <div><p class="text-4xl font-bold text-green-500">10k+</p><p class="text-gray-600">{{ t['stats_lines'] }}</p></div>
+  </div>
+</section>
+
+<!-- Навыки -->
+<section id="skills" class="py-12 md:py-20 flex flex-col items-center justify-center px-4">
+  <h2 data-aos="fade-up" class="text-3xl font-semibold mb-6">{{ t['skills_title'] }}</h2>
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+    {% for skill in ['Python', 'Flask', 'SQLAlchemy', 'Flutter', 'Dart', 'JavaScript', 'HTML5', 'CSS3'] %}
+    <div data-aos="flip-left" data-aos-delay="{{ loop.index * 100 }}" class="bg-white shadow rounded-lg p-4 hover:scale-105 transition-transform duration-300">
+      <p class="text-lg font-semibold">{{ skill }}</p>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- Проекты -->
+<section id="projects" class="py-12 md:py-20 text-center px-4">
+  <h2 class="text-3xl font-semibold mb-6">{{ t['projects_title'] }}</h2>
+  <div class="max-w-2xl mx-auto text-gray-600">
+    <h3 class="text-xl font-semibold">KEZEN</h3>
+    <p class="mt-2">{{ t['projects_kezen_desc'] }}</p>
+  </div>
+</section>
+
+<section class="py-12">
+  <div class="container mx-auto px-4">
+    <h2 class="text-3xl font-semibold mb-6 text-center">{{ t['certificates_title'] }}</h2>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {% for cert in certificates %}
+      <a href="{{ cert.url or '#' }}" target="_blank" class="group block hover:scale-105 transition-transform duration-300">
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300">
+          <img src="{{ url_for('static', filename=cert.image_path) }}" alt="{{ cert.title }}" class="w-full h-48 object-contain bg-white p-4">
+          <div class="p-4 text-center">
+            <h3 class="font-semibold text-lg text-gray-800 group-hover:text-green-600 transition-colors duration-300">{{ cert.title }}</h3>
+          </div>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section id="testimonials" class="py-16 bg-white">
+  <div class="max-w-5xl mx-auto px-4 text-center">
+    <h2 class="text-3xl font-semibold mb-10">{{ t['testimonials_title'] }}</h2>
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="bg-gray-50 p-6 rounded-xl shadow hover:shadow-md transition" data-aos="fade-up">
+        <p class="text-gray-600">"{{ t['testimonial_1'] }}"</p>
+        <p class="mt-4 font-semibold text-green-600">— Тимур, {{ t['nav_about'] | lower }}</p>
+      </div>
+      <div class="bg-gray-50 p-6 rounded-xl shadow hover:shadow-md transition" data-aos="fade-up" data-aos-delay="100">
+        <p class="text-gray-600">"{{ t['testimonial_2'] }}"</p>
+        <p class="mt-4 font-semibold text-green-600">— Аяна, UX</p>
+      </div>
+      <div class="bg-gray-50 p-6 rounded-xl shadow hover:shadow-md transition" data-aos="fade-up" data-aos-delay="200">
+        <p class="text-gray-600">"{{ t['testimonial_3'] }}"</p>
+        <p class="mt-4 font-semibold text-green-600">— Руслан, {{ t['nav_about'] | lower }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- Контакты -->
+<section id="contacts" class="py-12 md:py-20 flex flex-col items-center justify-center px-4">
+  <h2 class="text-3xl font-semibold mb-6">{{ t['contact_title'] }}</h2>
+  <form id="contactForm" data-aos="fade-up" class="space-y-4 w-full max-w-md">
+  <input type="text" name="name" placeholder="{{ t['form_name'] }}" class="w-full px-4 py-2 rounded border" required>
+  <input type="email" name="email" placeholder="{{ t['form_email'] }}" class="w-full px-4 py-2 rounded border" required>
+  <input type="text" name="phone" placeholder="{{ t['form_phone'] }}" class="w-full px-4 py-2 rounded border">
+  <input type="text" name="company" placeholder="{{ t['form_company'] }}" class="w-full px-4 py-2 rounded border">
+  <textarea name="message" placeholder="{{ t['form_message'] }}" class="w-full px-4 py-2 rounded border" required></textarea>
+  <button type="submit" class="w-full bg-green-500 text-white py-2 rounded hover:bg-green-600">{{ t['form_submit'] }}</button>
+</form>
+
+  <div id="responseMessage" class="text-green-600 mt-4"></div>
+</section>
+
+<div id="successPopup" class="fixed top-20 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-green-400 to-teal-500 text-white px-6 py-4 rounded-lg shadow-lg text-center text-lg font-medium opacity-0 transition-opacity duration-500 z-50">
+  {{ t['success_popup'] }}
+</div>
+
+{% endblock %}
